@@ -7,7 +7,7 @@
     "build": "babel src/ -d lib/",
     "prepublish": "npm run build",
     "flow": "flow",
-    "precommit": "npm run flow && npm run linting && prettier --write",
+    "precommit": "npm run flow && npm run linting",
     "linting": "eslint --ext .js ./src --fix"
   },
   "pre-commit": [
