@@ -1,6 +1,6 @@
 const Discord = require('discord.io');
 const logger = require('winston');
-const auth = require('./auth.json');
+const auth = require('../auth.json');
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -14,22 +14,41 @@ const bot = new Discord.Client({
   token: auth.token,
   autorun: true
 });
-bot.on('ready', function (evt) {
+
+bot.on('ready', () => {
   logger.info('Connected');
   logger.info('Logged in as: ');
   logger.info(bot.username + ' - (' + bot.id + ')');
+  bot.user.setPresence({game: {
+    name: 'With Javascript',
+    type: 0
+  }})
 });
-bot.on('message', function (user, userID, channelID, message, evt) {
 
-  // Our bot needs to know if it will execute a command
-  // It will listen for messages that will start with `!`
+bot.on('message', (receivedMessage) => {
+  // prevent the bot from responding to its own messages
+  if (receivedMessage === bot.user) {
+    return;
+  }
+
+  receivedMessage.react("👍");
+});
+
+
+bot.on('message', (user, userID, channelID, message) => {
+
+  // Commands are executed using ! -- bot will only listen and check for messages starting with !.
   if (message.substring(0, 1) === '!') {
     let args = message.substring(1).split(' ');
     let cmd = args[0];
 
-    args = args.splice(1);
     switch(cmd) {
-      // !ping
+      case 'intro':
+        bot.sendMessage({
+          to: channelID,
+          message: 'I am a bot being used to study and test javascript skills. Type !help for a list of commands.'
+        });
+        break;
       case 'ping':
         bot.sendMessage({
           to: channelID,
@@ -39,13 +58,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
       case 'help':
         bot.sendMessage({
           to: channelID,
-          message: '!ping, !help'
+          message: 'Current Commands: !ping, !help'
         });
         break;
       default:
         bot.sendMessage({
           to: channelID,
-          message: user + '- Sorry I dont know that one, please type !help for a full list of commands'
+          message: user + ' - Sorry I dont know that one, please type !help for a full list of commands'
         })
       // Just add any case commands if you want to..
     }
