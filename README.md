@@ -1,4 +1,3 @@
-![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
 ![license: MIT](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)
 ![ESLint: Airbnb](https://img.shields.io/badge/ESLint-Airbnb-blue.svg?style=flat-square) 
 ![Node: 10.13](https://img.shields.io/badge/Node-10.13-blue.svg?style=flat-square)
