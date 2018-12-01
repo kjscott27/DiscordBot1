@@ -1,14 +1,14 @@
-//@flow
-const Discord = require('discord.io');
-const logger = require('winston');
-const auth = require('../auth.json');
+// @flow
+const Discord = require("discord.io");
+const logger = require("winston");
+const auth = require("../auth.json");
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
-logger.add(new logger.transports.Console, {
+logger.add(new logger.transports.Console(), {
   colorize: true
 });
-logger.level = 'debug';
+logger.level = "debug";
 
 // Initialize Discord Bot
 const bot = new Discord.Client({
@@ -16,50 +16,48 @@ const bot = new Discord.Client({
   autorun: true
 });
 
-bot.on('ready', () => {
-  logger.info('Connected');
+bot.on("ready", () => {
+  logger.info("Connected");
   logger.info(`Logged in as: ${bot.username}(${bot.id})!`);
-  bot.setPresence({game: {
-    name: 'with JavaScript',
-    type: 0
-  }})
+  bot.setPresence({
+    game: {
+      name: "with JavaScript",
+      type: 0
+    }
+  });
 });
 
-bot.on('message', (user, userID, channelID, message) => {
-
-  const filter = (reaction) => reaction.emoji.name === '👌' && user.id === user;
-
+bot.on("message", (user, userID, channelID, message) => {
   // Commands are executed using ! -- bot will only listen and check for messages starting with !.
-  if (message.substring(0, 1) === '!') {
-    let args = message.substring(1).split(' ');
-    let cmd = args[0];
+  if (message.substring(0, 1) === "!") {
+    const args = message.substring(1).split("");
+    const cmd = args[0];
 
-    switch(cmd) {
-      case 'intro':
+    switch (cmd) {
+      case "intro":
         bot.sendMessage({
           to: channelID,
-          message: 'I am a bot being used to study and test javascript skills. Type !help for a list of commands.'
+          message:
+            "I am a bot being used to study and test javascript skills. Type !help for a list of commands."
         });
         break;
-      case 'ping':
+      case "ping":
         bot.sendMessage({
           to: channelID,
-          message: 'Pong!'
+          message: "Pong!"
         });
         break;
-      case 'help':
+      case "help":
         bot.sendMessage({
           to: channelID,
-          message: 'Current Commands: !ping, !help' })
-          .then(message.awaitReactions(filter, { time: 1500 }))
-          .then(message.delete)
-          .catch(console.error);
+          message: "Current Commands: !ping, !help"
+        });
         break;
       default:
         bot.sendMessage({
           to: channelID,
-          message: user + ' - Sorry I dont know that one, please type !help for a full list of commands'
-        })
+          message: `${user} - Sorry I dont know that one, please type !help for a full list of commands`
+        });
     }
   }
 });
