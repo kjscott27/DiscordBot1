@@ -7,7 +7,7 @@
     "build": "babel src/ -d lib/",
     "prepublish": "npm run build",
     "flow": "flow",
-    "precommit": "npm run flow && npm run linting",
+    "precommit": "npm run flow && npm run linting && git add .",
     "linting": "eslint --ext .js ./src --fix"
   },
   "pre-commit": [
@@ -28,6 +28,6 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "flow-bin": "^0.87.0",
-    "pre-commit": "^1.2.2",
+    "pre-commit": "^1.2.2"
   }
 }
