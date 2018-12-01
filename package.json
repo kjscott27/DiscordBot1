@@ -10,6 +10,9 @@
     "precommit": "npm run flow && npm run linting && prettier --write",
     "linting": "eslint --ext .js ./src --fix"
   },
+  "pre-commit": [
+    "precommit"
+  ],
   "author": "Kyle Scott",
   "license": "MIT",
   "repository": "https://github.com/kjscott27/DiscordBot1",
