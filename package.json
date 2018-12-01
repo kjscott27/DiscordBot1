@@ -3,14 +3,26 @@
   "version": "0.0.1",
   "description": "First attempt at making a Discord Bot",
   "main": "src/bot.js",
+  "scripts": {
+    "build": "babel src/ -d lib/",
+    "prepublish": "npm run build",
+    "flow": "flow"
+  },
   "author": "Kyle Scott",
   "license": "MIT",
   "repository": "https://github.com/kjscott27/DiscordBot1",
   "dependencies": {
     "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "flow": "^0.2.3",
     "winston": "^3.1.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "flow-bin": "^0.87.0",
     "prettier": "1.15.3"
   }
 }
