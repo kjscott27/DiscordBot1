@@ -2,12 +2,15 @@
   "name": "test-bot",
   "version": "0.0.1",
   "description": "First attempt at making a Discord Bot",
-  "main": "bot.js",
+  "main": "src/bot.js",
   "author": "Kyle Scott",
   "license": "MIT",
   "repository": "https://github.com/kjscott27/DiscordBot1",
   "dependencies": {
     "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
     "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "prettier": "1.15.3"
   }
 }
