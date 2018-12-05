@@ -18,7 +18,8 @@ logger.level = 'debug';
 // Initialize the Bot
 bot.on('ready', () => {
   logger.info('Connected');
-  bot.user.setActivity('Playing with JavaScript', 'twitch.tv/kjs0');
+  bot.user.setActivity('with JavaScript (tb!intro)')
+    .then(presence => logger.info(`Activity set to: ${presence.game ? presence.game.name : 'none'}`));
 });
 
 // When a user is added to the Discord
@@ -36,21 +37,28 @@ bot.on('message', (message) => {
   if (message.author.bot) {
     return;
   }
-
   if (message.content.startsWith(prefix)) {
     logger.info(`Command Read: ${message}`);
-
+    message.delete(15000);
     if (message.content.startsWith(`${prefix}intro`)) {
-      message.reply('Hi! I am a bot created for Discord to respond to simple commands, as I have been created as an experiment my complexity may change over time. Type !help to get started.');
+      // INTRODUCTION MESSAGE
+      message.reply('Hi! I am a bot created for Discord to respond to simple commands, as I have been created as an experiment my complexity may change over time. Type !help to get started.')
+        .then((msg) => { msg.delete(15000); });
     } else if (message.content.startsWith(`${prefix}help`)) {
-      message.reply('The commands I currently respond to are: ');
-      message.channel.send('* tb!help');
-      message.channel.send('* tb!intro');
-      message.channel.send('* tb!gitrepo');
+      // HELP MESSAGE
+      message.reply(`The commands I currently respond to are:
+      - tb!help
+      - tb!intro
+      - tb!gitrepo`)
+        .then((msg) => { msg.delete(15000); });
     } else if (message.content.startsWith(`${prefix}gitrepo`)) {
-      message.reply('The repository for this bot on github can be located here: https://github.com/kjscott27/DiscordBot1');
+      // DISPLAY GIT REPO
+      message.reply('The repository for this bot on github can be located here: https://github.com/kjscott27/DiscordBot1')
+        .then((msg) => { msg.delete(15000); });
     } else {
-      message.reply('It seems you gave me a command that I do not understand, type tb!help for a list of commands I do know.');
+      // IF THE COMMAND IS NOT SUPPORTED
+      message.reply('It seems you gave me a command that I do not understand, type tb!help for a list of commands I do know.')
+        .then((msg) => { msg.delete(15000); });
     }
   }
 });
