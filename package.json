@@ -1,6 +1,6 @@
 {
   "name": "test-bot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "First attempt at making a Discord Bot",
   "main": "src/bot.js",
   "scripts": {
@@ -17,7 +17,6 @@
   "license": "MIT",
   "repository": "https://github.com/kjscott27/DiscordBot1",
   "dependencies": {
-    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
     "discord.js": "^11.4.2",
     "flow": "^0.2.3",
     "winston": "^3.1.0"
