@@ -25,3 +25,4 @@ yarn-error.log*
 # IDE / API Tokens
 .idea/*
 token.js
+auth.json

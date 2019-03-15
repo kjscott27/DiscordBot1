@@ -1,4 +1,3 @@
-// @flow
 const Discord = require('discord.js');
 const logger = require('winston');
 const token = require('../token.js');
